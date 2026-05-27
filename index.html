@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación Elegante - 50 Cumpleaños</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Paleta ultra elegante */
+        :root {
+            --wine-bg: #2b0000;
+            --wine-dark: #120000;
+            --gold-light: #f9f295;
+            --gold-mid: #e0aa3e;
+            --gold-dark: #b8860b;
+            --silver: #e8e8e8;
+        }
+
+        body {
+            background-color: var(--wine-dark);
+            background-image: radial-gradient(circle at top center, var(--wine-bg) 0%, var(--wine-dark) 100%);
+            background-attachment: fixed;
+            color: var(--silver);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+            scroll-behavior: smooth;
+        }
+
+        .font-script { font-family: 'Great Vibes', cursive; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+
+        /* Estrellas flotantes y parpadeantes */
+        .star {
+            position: absolute;
+            background: radial-gradient(circle, #fff 0%, rgba(224, 170, 62, 0.5) 50%, transparent 100%);
+            border-radius: 50%;
+            animation: twinkle var(--duration) ease-in-out infinite alternate;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.1; transform: scale(0.5); box-shadow: 0 0 2px var(--gold-mid); }
+            100% { opacity: 0.8; transform: scale(1.5); box-shadow: 0 0 10px var(--gold-light); }
+        }
+
+        /* El Gran Número 50 */
+        .number-50 {
+            font-size: 8rem;
+            line-height: 1;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            background: linear-gradient(to bottom right, var(--gold-light), var(--gold-mid) 40%, var(--gold-dark) 60%, var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.6));
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @media (min-width: 768px) {
+            .number-50 { font-size: 12rem; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Tarjetas de cristal (Glassmorphism) elegante */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(224, 170, 62, 0.2);
+            border-top: 1px solid rgba(224, 170, 62, 0.5);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Texto dorado sutil */
+        .gold-text {
+            background: linear-gradient(to right, var(--gold-light), var(--gold-mid), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Divisores elegantes */
+        .elegant-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        .elegant-divider::before, .elegant-divider::after {
+            content: "";
+            height: 1px;
+            width: 30%;
+            background: linear-gradient(to center, transparent, rgba(224, 170, 62, 0.5), transparent);
+            background: linear-gradient(90deg, transparent, var(--gold-mid), transparent);
+        }
+        .elegant-divider i {
+            color: var(--gold-mid);
+            margin: 0 15px;
+            font-size: 0.8rem;
+        }
+
+        /* Animaciones iniciales (Fade In) */
+        .fade-in { animation: fadeIn 1.5s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Animaciones activadas por Scroll (Scroll Reveal) */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 1s ease-out;
+        }
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Flecha animada de scroll */
+        .scroll-arrow {
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-15px); }
+            60% { transform: translateY(-7px); }
+        }
+
+        /* EFECTO DE PANELES FIJOS ENCIMADOS (Sticky Stacking) */
+        .sticky-panel {
+            position: sticky;
+            top: 0;
+            height: 100vh; /* Ocupa exactamente toda la pantalla para pegarse */
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            /* Fondo oscuro difuminado para tapar el panel anterior */
+            background: rgba(12, 0, 0, 0.85); 
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-top: 1px solid rgba(224, 170, 62, 0.2);
+            box-shadow: 0 -20px 40px rgba(0,0,0,0.8);
+            z-index: 2;
+        }
+        
+        /* El primer panel no necesita tapar a nadie */
+        .sticky-panel.first-panel {
+            background: transparent;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+            border-top: none;
+            box-shadow: none;
+            z-index: 1;
+        }
+
+        /* Panel final desliza y fluye de manera normal */
+        .sliding-panel {
+            position: relative;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(8, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(224, 170, 62, 0.3);
+            box-shadow: 0 -20px 40px rgba(0,0,0,0.8);
+            z-index: 3;
+            padding-top: 5rem;
+            padding-bottom: 2rem;
+        }
+
+        /* Botones ultra elegantes */
+        .btn-elegant {
+            background: transparent;
+            border: 1px solid var(--gold-mid);
+            color: var(--gold-light);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+        }
+        .btn-elegant::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(249, 242, 149, 0.2), transparent);
+            transition: all 0.4s ease;
+        }
+        .btn-elegant:hover::before { left: 100%; }
+        .btn-elegant:hover {
+            background: rgba(224, 170, 62, 0.1);
+            box-shadow: 0 0 20px rgba(224, 170, 62, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .btn-filled {
+            background: linear-gradient(135deg, var(--gold-mid), var(--gold-dark));
+            color: var(--wine-dark);
+            border: none;
+            box-shadow: 0 4px 15px rgba(224, 170, 62, 0.3);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .btn-filled:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(224, 170, 62, 0.5);
+        }
+
+        .content-z { position: relative; z-index: 10; }
+
+        /* Animaciones para simular GIFs transparentes */
+        .sway { animation: sway 3s ease-in-out infinite alternate; }
+        @keyframes sway { from { transform: rotate(-10deg); } to { transform: rotate(10deg); } }
+        
+        .float-slow { animation: floatSlow 4s ease-in-out infinite; }
+        @keyframes floatSlow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        
+        .pulse-soft { animation: pulseSoft 2s infinite; }
+        @keyframes pulseSoft { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+    </style>
+</head>
+<body class="antialiased min-h-screen relative">
+
+    <!-- Elemento de Audio (Música de fondo) -->
+    <audio id="bg-music" loop>
+        <source src="musica 1.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Contenedor para las estrellas generadas por JS -->
+    <div id="stars-container" class="fixed inset-0 overflow-hidden pointer-events-none z-0"></div>
+
+    <!-- ================= PANTALLA 1: PORTADA ================= -->
+    <div id="pantalla1" class="fixed inset-0 flex flex-col items-center justify-center z-50 transition-all duration-1000 bg-black/40 backdrop-blur-sm">
+        <div class="text-center p-8 max-w-sm w-full mx-4 flex flex-col items-center justify-center">
+            
+            <p class="font-serif italic text-gray-300 text-lg mb-2 tracking-wide font-light">Te invito a celebrar</p>
+            <h2 class="font-serif text-3xl md:text-4xl gold-text tracking-widest uppercase mb-4">Mis</h2>
+            
+            <!-- El Gran Número 50 -->
+            <div class="number-50 my-2">50</div>
+            
+            <h2 class="font-serif text-2xl md:text-3xl text-gray-200 tracking-widest uppercase mt-4 mb-12">Años</h2>
+            
+            <button onclick="abrirInvitacion()" class="btn-elegant py-4 px-10 rounded-full flex items-center justify-center mx-auto space-x-3">
+                <span>Abrir Invitación</span>
+                <i class="fa-solid fa-angle-right text-sm"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- ================= PANTALLA 2: CONTENIDO ================= -->
+    <div id="pantalla2" class="hidden content-z w-full opacity-0 transition-opacity duration-1000">
+        
+        <!-- PANEL 1 FIJO: Título Inicial -->
+        <div class="sticky-panel first-panel">
+            <div class="w-full max-w-2xl mx-auto px-5 h-full flex flex-col items-center justify-center text-center">
+                <div class="fade-in" style="animation-delay: 0.2s;">
+                    <p class="font-serif italic text-lg md:text-xl text-gray-300 mb-8 leading-relaxed font-light px-4">
+                        "Cincuenta años de amor, risas, aprendizajes y recuerdos inolvidables. Me llena de ilusión compartir este momento tan especial contigo."
+                    </p>
+                    
+                    <h1 class="font-script text-7xl md:text-8xl gold-text drop-shadow-2xl py-4 leading-tight">Carmelita</h1>
+                    <h2 class="font-script text-5xl md:text-6xl text-gray-300 -mt-2 py-4 leading-tight">Flores</h2>
+                    
+                    <div class="elegant-divider w-full">
+                        <i class="fa-solid fa-diamond"></i>
+                    </div>
+                </div>
+
+                <!-- Flecha animada invitando a hacer scroll -->
+                <div class="mt-8 flex flex-col items-center justify-center fade-in" style="animation-delay: 1.5s;">
+                    <span class="text-xs text-yellow-600/70 uppercase tracking-widest mb-3 font-medium">Desliza hacia abajo</span>
+                    <i class="fa-solid fa-chevron-down text-2xl text-yellow-500 scroll-arrow"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL 2 FIJO: Detalles del Evento -->
+        <div class="sticky-panel">
+            <div class="w-full max-w-2xl mx-auto px-5 h-full flex flex-col items-center justify-center text-center scroll-reveal">
+                
+                <div class="flex items-center justify-center space-x-6 mb-10">
+                    <i class="fa-solid fa-leaf text-4xl gold-text float-slow"></i>
+                    <i class="fa-solid fa-champagne-glasses text-6xl text-yellow-500 sway drop-shadow-lg"></i>
+                    <i class="fa-solid fa-leaf text-4xl gold-text float-slow" style="animation-delay: 1s;"></i>
+                </div>
+
+                <div class="w-full glass-card rounded-3xl p-10 relative">
+                    <h3 class="font-script text-4xl gold-text mb-8">Cuándo y Dónde</h3>
+                    
+                    <div class="space-y-6 font-light">
+                        <div class="flex flex-col items-center justify-center">
+                            <i class="fa-regular fa-calendar text-2xl text-gray-400 mb-2"></i>
+                            <span class="text-xl tracking-wider text-gray-100 uppercase">Sábado 18 de Julio</span>
+                        </div>
+                        
+                        <div class="flex flex-col items-center justify-center pt-2">
+                            <i class="fa-solid fa-location-dot text-2xl text-yellow-600 mb-2"></i>
+                            <span class="text-lg tracking-wider text-gray-200 text-center">Salón de Fiestas<br><span class="font-medium text-yellow-500 uppercase">"El Partenón"</span></span>
+                        </div>
+                        
+                        <div class="flex flex-row justify-center items-center space-x-12 pt-4">
+                            <div class="flex flex-col items-center">
+                                <i class="fa-regular fa-clock text-yellow-600 mb-2 text-xl"></i>
+                                <span class="text-sm text-gray-400 uppercase tracking-widest">Recepción</span>
+                                <span class="text-xl font-medium text-gray-200">2:30 PM</span>
+                            </div>
+                            <div class="w-px h-12 bg-gradient-to-b from-transparent via-yellow-600/50 to-transparent"></div>
+                            <div class="flex flex-col items-center">
+                                <i class="fa-solid fa-wine-glass text-yellow-600 mb-2 text-xl"></i>
+                                <span class="text-sm text-gray-400 uppercase tracking-widest">Comida</span>
+                                <span class="text-xl font-medium text-gray-200">3:00 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 pt-6 border-t border-yellow-600/20">
+                        <p class="font-serif italic text-xl gold-text">¡Habrá grandes sorpresas!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PANEL FINAL CON SCROLL NORMAL: Cuenta Regresiva, Botones y Formulario -->
+        <div class="sliding-panel">
+            <div class="w-full max-w-2xl mx-auto px-5 flex flex-col items-center text-center scroll-reveal">
+                
+                <!-- Cuenta Regresiva -->
+                <div class="flex items-center justify-center mb-8">
+                    <div class="pulse-soft relative">
+                        <i class="fa-solid fa-cake-candles text-7xl gold-text drop-shadow-xl"></i>
+                        <div class="absolute -top-4 -right-4 star w-4 h-4" style="animation-duration: 2s;"></div>
+                    </div>
+                </div>
+
+                <div class="elegant-divider w-full">
+                    <i class="fa-regular fa-hourglass-half text-xl"></i>
+                </div>
+                
+                <h3 class="font-serif text-2xl text-gray-300 mt-4 mb-8">Faltan:</h3>
+
+                <div class="flex justify-center gap-4 md:gap-6 w-full mb-16">
+                    <div class="flex flex-col items-center">
+                        <div class="glass-card rounded-2xl w-16 h-20 md:w-20 md:h-24 flex items-center justify-center mb-2 shadow-[0_10px_20px_rgba(0,0,0,0.4)]">
+                            <span id="days" class="text-3xl md:text-4xl font-serif gold-text">00</span>
+                        </div>
+                        <span class="text-[10px] uppercase tracking-widest text-gray-400">Días</span>
+                    </div>
+                    
+                    <div class="flex flex-col items-center">
+                        <div class="glass-card rounded-2xl w-16 h-20 md:w-20 md:h-24 flex items-center justify-center mb-2 shadow-[0_10px_20px_rgba(0,0,0,0.4)]">
+                            <span id="hours" class="text-3xl md:text-4xl font-serif text-gray-200">00</span>
+                        </div>
+                        <span class="text-[10px] uppercase tracking-widest text-gray-400">Hrs</span>
+                    </div>
+                    
+                    <div class="flex flex-col items-center">
+                        <div class="glass-card rounded-2xl w-16 h-20 md:w-20 md:h-24 flex items-center justify-center mb-2 shadow-[0_10px_20px_rgba(0,0,0,0.4)]">
+                            <span id="minutes" class="text-3xl md:text-4xl font-serif gold-text">00</span>
+                        </div>
+                        <span class="text-[10px] uppercase tracking-widest text-gray-400">Min</span>
+                    </div>
+                    
+                    <div class="flex flex-col items-center">
+                        <div class="glass-card rounded-2xl w-16 h-20 md:w-20 md:h-24 flex items-center justify-center mb-2 shadow-[0_10px_20px_rgba(0,0,0,0.4)]">
+                            <span id="seconds" class="text-3xl md:text-4xl font-serif text-gray-200">00</span>
+                        </div>
+                        <span class="text-[10px] uppercase tracking-widest text-gray-400">Seg</span>
+                    </div>
+                </div>
+
+                <!-- Botones de Acción -->
+                <div class="w-full space-y-6 mb-16 flex flex-col items-center">
+                    <a href="https://maps.app.goo.gl/SaYH1zgiLYB1Ugec9?g_st=aw" target="_blank" class="w-full max-w-sm glass-card hover:bg-white/10 text-gray-200 font-medium py-4 px-6 rounded-full transition flex items-center justify-center space-x-3 text-sm tracking-widest uppercase">
+                        <i class="fa-solid fa-map-location-dot text-yellow-500 text-lg"></i>
+                        <span>Ubicación de la Fiesta</span>
+                    </a>
+
+                    <a href="https://photos.app.goo.gl/4ka8tuLTfPTF19VX7" target="_blank" class="w-full max-w-sm glass-card hover:bg-white/10 text-gray-200 font-medium py-4 px-6 rounded-full transition flex items-center justify-center space-x-3 text-sm tracking-widest uppercase border border-yellow-600/40 shadow-[0_0_15px_rgba(224,170,62,0.1)]">
+                        <i class="fa-solid fa-images text-yellow-500 text-lg"></i>
+                        <span>Sube tus Fotos del Evento</span>
+                    </a>
+
+                    <a href="https://wa.me/527224371454?text=¡Hola!%20Confirmo%20mi%20asistencia%20al%20cumpleaños%2050%20de%20Carmelita." target="_blank" class="w-full max-w-sm btn-filled font-bold py-5 px-6 rounded-full transition flex items-center justify-center space-x-3 text-sm tracking-widest mt-4">
+                        <i class="fa-brands fa-whatsapp text-2xl"></i>
+                        <span>Confirmar Asistencia</span>
+                    </a>
+                </div>
+
+                <!-- Formulario Emotivo -->
+                <div class="w-full glass-card rounded-3xl p-8 relative text-left mb-16">
+                    <h3 class="font-script text-4xl gold-text mb-4 text-center">Déjame un mensaje</h3>
+                    <p class="text-sm font-light text-gray-300 text-center mb-6">Comparte tus deseos o palabras emotivas conmigo.</p>
+                    
+                    <div id="form-error" class="hidden text-red-400 text-sm mb-2 text-center">Por favor, completa tu nombre y mensaje.</div>
+                    
+                    <input type="text" id="guest-name" placeholder="Tu nombre" class="w-full bg-black/40 border border-yellow-600/30 rounded-xl p-4 mb-4 text-gray-200 focus:outline-none focus:border-yellow-500 transition-colors">
+                    
+                    <textarea id="guest-message" rows="3" placeholder="Escribe tu mensaje emotivo..." class="w-full bg-black/40 border border-yellow-600/30 rounded-xl p-4 mb-6 text-gray-200 focus:outline-none focus:border-yellow-500 transition-colors resize-none"></textarea>
+                    
+                    <button onclick="enviarMensajePersonalizadoWA()" class="w-full btn-filled font-bold py-4 px-6 rounded-full transition flex items-center justify-center space-x-3 text-sm tracking-widest">
+                        <i class="fa-solid fa-paper-plane text-lg"></i>
+                        <span>Enviar mis deseos</span>
+                    </button>
+                </div>
+
+                <!-- Cierre Final -->
+                <div class="flex items-center justify-center space-x-4 mb-12">
+                    <i class="fa-solid fa-gift text-4xl text-yellow-600 sway"></i>
+                    <i class="fa-solid fa-star text-xl gold-text pulse-soft"></i>
+                    <i class="fa-solid fa-music text-3xl text-yellow-600 sway" style="animation-delay: 0.5s;"></i>
+                </div>
+
+                <!-- Footer -->
+                <footer class="w-full text-center pt-8 border-t border-yellow-600/30">
+                    <p class="text-xs text-gray-500 tracking-widest uppercase">
+                        Diseñado por <a href="http://www.invytte.com" target="_blank" class="text-yellow-600 font-medium hover:text-yellow-400 transition">INVYTE</a>
+                    </p>
+                </footer>
+                
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Lógica JavaScript -->
+    <script>
+        // Generador de estrellas de fondo
+        function crearEstrellas() {
+            const container = document.getElementById('stars-container');
+            const numStars = 60;
+
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                const x = Math.random() * 100;
+                const y = Math.random() * 100;
+                const size = Math.random() * 3 + 1;
+                const duration = Math.random() * 4 + 2;
+
+                star.style.left = `${x}%`;
+                star.style.top = `${y}%`;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.setProperty('--duration', `${duration}s`);
+                star.style.animationDelay = `${Math.random() * 5}s`;
+
+                container.appendChild(star);
+            }
+        }
+
+        // Observador de Scroll para animar elementos al ser descubiertos
+        function inicializarScrollReveal() {
+            const reveals = document.querySelectorAll('.scroll-reveal');
+            
+            const revealOptions = {
+                threshold: 0.15, 
+                rootMargin: "0px" 
+            };
+
+            const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, revealOptions);
+
+            reveals.forEach(reveal => {
+                revealOnScroll.observe(reveal);
+            });
+        }
+
+        window.onload = crearEstrellas;
+
+        // Transición de pantallas
+        function abrirInvitacion() {
+            const pantalla1 = document.getElementById('pantalla1');
+            const pantalla2 = document.getElementById('pantalla2');
+            const bgMusic = document.getElementById('bg-music');
+
+            // Iniciar música de fondo
+            bgMusic.play().catch(error => console.log("Autoplay bloqueado por el navegador:", error));
+
+            // Fade out portada
+            pantalla1.style.opacity = '0';
+            
+            setTimeout(() => {
+                pantalla1.style.display = 'none';
+                pantalla2.classList.remove('hidden');
+                
+                // Disparar reflow
+                void pantalla2.offsetWidth;
+                
+                pantalla2.classList.remove('opacity-0');
+
+                // Inicializar las animaciones de scroll una vez que se muestra la segunda pantalla
+                inicializarScrollReveal();
+            }, 800);
+        }
+
+        // Configuración de la Cuenta Regresiva (18 de Julio 14:30)
+        const currentYear = new Date().getFullYear();
+        let targetDate = new Date(`July 18, ${currentYear} 14:30:00`).getTime();
+        
+        if (new Date().getTime() > targetDate) {
+            targetDate = new Date(`July 18, ${currentYear + 1} 14:30:00`).getTime();
+        }
+
+        const countdownTimer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
+
+            if (distance < 0) {
+                clearInterval(countdownTimer);
+                document.getElementById("days").innerHTML = "00";
+                document.getElementById("hours").innerHTML = "00";
+                document.getElementById("minutes").innerHTML = "00";
+                document.getElementById("seconds").innerHTML = "00";
+            }
+        }, 1000);
+
+        // Función para enviar el formulario emotivo por WhatsApp
+        function enviarMensajePersonalizadoWA() {
+            const nombre = document.getElementById('guest-name').value.trim();
+            const mensaje = document.getElementById('guest-message').value.trim();
+            const errorDiv = document.getElementById('form-error');
+
+            if (!nombre || !mensaje) {
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+            errorDiv.classList.add('hidden');
+
+            const textoCodificado = encodeURIComponent(`¡Hola Carmelita! Soy ${nombre}.\n\n${mensaje}`);
+            const numero = "527224371454";
+            window.open(`https://wa.me/${numero}?text=${textoCodificado}`, '_blank');
+        }
+    </script>
+</body>
+</html>
